@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "dgSpecHash": "TlsdWUBbDwg=",
+  "success": true,
+  "projectFilePath": "C:\\GitFolders\\KinalSports\\authentication-service\\src\\AuthService.Application\\AuthService.Application.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Informatica\\.nuget\\packages\\fluentvalidation\\12.1.1\\fluentvalidation.12.1.1.nupkg.sha512",
+    "C:\\Users\\Informatica\\.nuget\\packages\\microsoft.extensions.configuration\\10.0.2\\microsoft.extensions.configuration.10.0.2.nupkg.sha512",
+    "C:\\Users\\Informatica\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\10.0.2\\microsoft.extensions.configuration.abstractions.10.0.2.nupkg.sha512",
+    "C:\\Users\\Informatica\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\10.0.2\\microsoft.extensions.dependencyinjection.10.0.2.nupkg.sha512",
+    "C:\\Users\\Informatica\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\10.0.2\\microsoft.extensions.dependencyinjection.abstractions.10.0.2.nupkg.sha512",
+    "C:\\Users\\Informatica\\.nuget\\packages\\microsoft.extensions.primitives\\10.0.2\\microsoft.extensions.primitives.10.0.2.nupkg.sha512",
+    "C:\\Users\\Informatica\\.nuget\\packages\\system.componentmodel.annotations\\5.0.0\\system.componentmodel.annotations.5.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
