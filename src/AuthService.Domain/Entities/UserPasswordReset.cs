@@ -1,6 +1,7 @@
+using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+
 namespace AuthService.Domain.Entities;
- 
 public class UserPasswordReset
 {
     [Key]
@@ -9,6 +10,7 @@ public class UserPasswordReset
  
     [Required]
     [MaxLength(16)]
+    [ForeignKey(nameof(User))] // Clave foránea que referencia a la entidad User, indicando que cada restablecimiento de contraseña está asociado a un usuario específico.
     public string UserId { get; set; } = string.Empty;
  
     [MaxLength(256)]
