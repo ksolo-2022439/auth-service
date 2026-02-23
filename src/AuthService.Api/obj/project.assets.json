@@ -935,6 +935,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
+          "AuthService.Application": "1.0.0",
           "AuthService.Domain": "1.0.0",
           "EFCore.NamingConventions": "9.0.0",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "8.0.4"
@@ -2473,7 +2474,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Users\\Informatica\\dotnet\\sdk\\8.0.418/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.416/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

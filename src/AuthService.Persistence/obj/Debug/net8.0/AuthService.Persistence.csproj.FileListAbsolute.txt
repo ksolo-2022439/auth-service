@@ -16,3 +16,5 @@ C:\GitFolders\auth-service\src\AuthService.Persistence\obj\Debug\net8.0\refint\A
 C:\GitFolders\auth-service\src\AuthService.Persistence\obj\Debug\net8.0\AuthService.Persistence.pdb
 C:\GitFolders\auth-service\src\AuthService.Persistence\obj\Debug\net8.0\AuthService.Persistence.genruntimeconfig.cache
 C:\GitFolders\auth-service\src\AuthService.Persistence\obj\Debug\net8.0\ref\AuthService.Persistence.dll
+C:\GitFolders\auth-service\src\AuthService.Persistence\bin\Debug\net8.0\AuthService.Application.dll
+C:\GitFolders\auth-service\src\AuthService.Persistence\bin\Debug\net8.0\AuthService.Application.pdb
