@@ -1,0 +1,23 @@
+# Directorios de compilación y publicación
+**/bin/
+**/obj/
+**/out/
+**/publish/
+
+# Archivos y directorios de Visual Studio / IDEs
+**/.vs/
+**/.vscode/
+**/*.*proj.user
+
+# Git y entorno
+**/.git/
+**/.github/
+**/.env
+
+# Logs y pruebas
+**/logs/
+**/TestResults/
+
+# El propio Dockerfile
+Dockerfile
+.dockerignore

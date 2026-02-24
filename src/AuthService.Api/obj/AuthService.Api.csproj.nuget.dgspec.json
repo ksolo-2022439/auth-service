@@ -52,15 +52,15 @@
           "dependencies": {
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
-              "version": "[8.0.20, )"
+              "version": "[8.0.10, )"
             },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
-              "version": "[8.0.22, )"
+              "version": "[8.0.10, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "target": "Package",
-              "version": "[8.0.20, )"
+              "version": "[8.0.10, )"
             },
             "NetEscapades.AspNetCore.SecurityHeaders": {
               "target": "Package",
@@ -68,11 +68,11 @@
             },
             "Serilog.AspNetCore": {
               "target": "Package",
-              "version": "[9.0.0, )"
+              "version": "[8.0.0, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
-              "version": "[9.0.4, )"
+              "version": "[6.6.2, )"
             }
           },
           "imports": [
@@ -94,7 +94,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.416/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Users\\Informatica\\dotnet\\sdk\\8.0.418/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
@@ -145,9 +145,25 @@
               "target": "Package",
               "version": "[12.1.1, )"
             },
+            "MailKit": {
+              "target": "Package",
+              "version": "[4.15.0, )"
+            },
+            "Microsoft.Extensions.Configuration": {
+              "target": "Package",
+              "version": "[10.0.3, )"
+            },
             "Microsoft.Extensions.DependencyInjection": {
               "target": "Package",
               "version": "[10.0.2, )"
+            },
+            "Microsoft.Extensions.Logging.Abstractions": {
+              "target": "Package",
+              "version": "[10.0.3, )"
+            },
+            "MimeKit": {
+              "target": "Package",
+              "version": "[4.15.0, )"
             }
           },
           "imports": [
@@ -166,7 +182,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.416/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Users\\Informatica\\dotnet\\sdk\\8.0.418/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
@@ -230,7 +246,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.416/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Users\\Informatica\\dotnet\\sdk\\8.0.418/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
@@ -288,7 +304,7 @@
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[8.0.4, )"
+              "version": "[8.0.10, )"
             },
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
@@ -311,7 +327,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.416/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Users\\Informatica\\dotnet\\sdk\\8.0.418/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
