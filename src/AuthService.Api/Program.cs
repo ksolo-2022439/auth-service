@@ -1,4 +1,4 @@
-
+using System.Linq.Expressions;
 using AuthService.Api.Extensions;
 using AuthService.Persistence.Data;
 
@@ -8,8 +8,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddApplicationServices(builder.Configuration);
+
+// CONFIGURACIÓN DE RUTAS
 builder.Services.AddControllers();
+
+// CONFIGURACIÓN DE SERVICIOS POR MEDIO DE MÉTODOS DE EXTENSIÓN
+builder.Services.AddApplicationServices(builder.Configuration);
 
 var app = builder.Build();
 
@@ -30,7 +34,7 @@ var summaries = new[]
 
 app.MapGet("/weatherforecast", () =>
 {
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
+    var forecast = Enumerable.Range(1, 5).Select(index =>
         new WeatherForecast
         (
             DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
@@ -43,29 +47,30 @@ app.MapGet("/weatherforecast", () =>
 .WithName("GetWeatherForecast")
 .WithOpenApi();
 
-// INICIALIZACION DE LA BASE DE DATOS
+// INICIALIZACIÓN DE LA BASE DE DATOS
 using (var scope = app.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
     var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
 
- try
- {
-    logger.LogInformation("Iniciando migración a la base de datos...");
+    try
+    {
+        logger.LogInformation("Iniciando migración de la base de datos...");
 
-    await context.Database.EnsureCreatedAsync();
+        await context.Database.EnsureCreatedAsync();
 
-    logger.LogInformation("Migración completada exitosamente");
-    await DataSeeder.SeedAsync(context);
-    logger.LogInformation("Datos iniciales cargados exitosamente");
- }  
- catch (Exception es)
- {
-    logger.LogError(es, "Error al inicializar la base de datos");
-    throw;
- } 
+        logger.LogInformation("Migración completada exitosamente");
+        await DataSeeder.SeedAsync(context);
+        logger.LogInformation("Datos iniciales cargados exitosamente");
+
+    }
+    catch (Exception es)
+    {
+        logger.LogError(es, "Error al inicializar la base de datos");
+        throw; // Detener la aplicación si hay un error al inicializar la base de datos
+    }
+
 }
-// -----------------------------------------------------------------------------------
 
 app.Run();
 

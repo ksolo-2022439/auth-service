@@ -18,14 +18,3 @@ public class Role
 
     public ICollection<UserRole> UserRoles { get; set; } = [];
 }
-
-/*
-Roles
-+--------------+--------------+------------------+
-| Id           | Name         | Description      |
-+--------------+--------------+------------------+
-| ADMIN        | Admin        | Administrador    |
-| USER         | User         | Usuario normal   |
-| GUEST        | Guest        | Invitado         |
-+--------------+--------------+------------------+
-*/

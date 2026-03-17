@@ -14,6 +14,7 @@ public class PasswordHashService : IPasswordHashService
     private const int Memory = 102400; // m=102400 KB = 100 MB (igual que Node.js)
     private const int Parallelism = 8; // p=8 (igual que Node.js)
 
+
     public string HashPassword(string password)
     {
         var salt = new byte[SaltSize];
@@ -133,7 +134,8 @@ public class PasswordHashService : IPasswordHashService
         var computedHash = argon2.GetBytes(HashSize);
         return hash.SequenceEqual(computedHash);
     }
-    
+
+
     private static string FromBase64UrlSafe(string base64UrlSafe)
     {
         // Reemplazar caracteres URL-safe con caracteres Base64 estándar

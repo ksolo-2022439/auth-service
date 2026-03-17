@@ -16,11 +16,11 @@ public static class DataSeeder
             {
                 new() {
                     Id = UuidGenerator.GenerateRoleId(),
-                    Name = RoleConstants.ADMIN_ROLE
+                        Name = RoleConstants.ADMIN_ROLE
                 },
                 new() {
                     Id = UuidGenerator.GenerateRoleId(),
-                    Name = RoleConstants.USER_ROLE
+                        Name = RoleConstants.USER_ROLE
                 }
             };
 
@@ -49,11 +49,10 @@ public static class DataSeeder
                     Surname = "User",
                     Username = "admin",
                     Email = "admin@ksports.local",
+                    //Password = passwordHasher.HashPassword("Admin1234!"),
                     Password = "12345678",
                     Status = true,
-                    CreatedAt = DateTime.UtcNow,
-                    UpdatedAt = DateTime.UtcNow,
-                    Profile = new UserProfile
+                    UserProfile = new UserProfile
                     {
                         Id = profileId,
                         UserId = userId,
