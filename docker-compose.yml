@@ -1,0 +1,35 @@
+services:
+  # Servicio de Base de Datos
+  auth-db:
+    image: postgres:16-alpine
+    container_name: auth-postgres-db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mysecurepassword123
+      POSTGRES_DB: auth_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  # Servicio de la API
+  auth-api:
+    image: auth-service-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: auth-service-container
+    depends_on:
+      - auth-db
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      # SOBREESCRITURA DE LA CADENA DE CONEXIÓN
+      # Importante: El Host debe ser el nombre del servicio de la db (auth-db)
+      - ConnectionStrings__DefaultConnection=Host=auth-db;Database=auth_db;Username=postgres;Password=mysecurepassword123
+    ports:
+      - "8080:8080"
+
+volumes:
+  postgres_data:

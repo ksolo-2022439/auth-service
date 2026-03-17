@@ -8,27 +8,27 @@ public class User
     [MaxLength(16)]
     public string Id { get; set; } = string.Empty;
 
-    [Required(ErrorMessage = "Name is required.")]
+    [Required(ErrorMessage = "El nombre es obligatorio")]
     [MaxLength(25)]
     public string Name { get; set; } = string.Empty;
 
-    [Required(ErrorMessage = "Surname is required.")]
-    [MaxLength(16)]
+    [Required(ErrorMessage = "El apellido es obligatorio")]
+    [MaxLength(25)]
     public string Surname { get; set; } = string.Empty;
 
-    [Required(ErrorMessage = "Username is required.")]
+    [Required]
     [MaxLength(50)]
     public string Username { get; set; } = string.Empty;
 
-    [Required(ErrorMessage = "Email is required.")]
-    [EmailAddress(ErrorMessage = "Invalid email format.")] // The value of this property must have an email format.
+    [Required]
+    [EmailAddress] //El valor de esta propiedad debe tener un formato de correo electronico
     public string Email { get; set; } = string.Empty;
 
-    [Required(ErrorMessage = "Password is required.")]
-    [MinLength(255)]
+    [Required]
+    [MaxLength(255)]
     public string Password { get; set; } = string.Empty;
 
-    [Required(ErrorMessage = "Status is required.")]
+    [Required]
     [MaxLength(25)]
     public bool Status { get; set; } = true;
 
@@ -38,9 +38,12 @@ public class User
     [Required]
     public DateTime UpdatedAt { get; set; }
 
-    // Relationships
-    public UserProfile UserProfile { get; set; } = null!;
+    //Relaciones de navegación solo dentro del código
+    //Esto no altera la base de datos
+    public UserProfile Profile { get; set;} = null!;
     public ICollection<UserRole> UserRoles { get; set; } = [];
     public UserEmail UserEmail { get; set; } = null!;
-    public UserPasswordReset UserPasswordReset { get; set; } = null!;
+    public UserPasswordReset PasswordReset { get; set; } = null!;
+
 }
+

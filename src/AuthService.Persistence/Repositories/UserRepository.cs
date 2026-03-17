@@ -8,25 +8,26 @@ namespace AuthService.Persistence.Repositories;
  
 public class UserRepository(ApplicationDbContext context) : IUserRepository
 {
-    public async Task<User> GetByIdAsync(string id)
+    
+    public async Task<User?> GetByIdAsync(string id)
     {
         var user = await context.Users
-        .Include(u => u.UserProfile)
-        .Include(u => u.UserEmail)
-        .Include(u => u.UserPasswordReset)
-        .Include(u => u.UserRoles)
-        .FirstOrDefaultAsync(u => u.Id == id);
+            .Include(u => u.Profile)        
+            .Include(u => u.UserEmail)
+            .Include(u => u.PasswordReset)  
+            .Include(u => u.UserRoles)
+            .FirstOrDefaultAsync(u => u.Id == id);
  
-        return user ?? throw new InvalidOperationException($"User with id {id} not found");
+        return user;
     }
  
     // 2. Busca un usuario por su Email (sin importar mayúsculas/minúsculas)
     public async Task<User?> GetByEmailAsync(string email)
     {
         return await context.Users
-            .Include(u => u.UserProfile)
+            .Include(u => u.Profile)
             .Include(u => u.UserEmail)
-            .Include(u => u.UserPasswordReset)
+            .Include(u => u.PasswordReset)
             .Include(u => u.UserRoles)
             .ThenInclude(ur => ur.Role)
             .FirstOrDefaultAsync(u => EF.Functions.ILike(u.Email, email));
@@ -36,9 +37,9 @@ public class UserRepository(ApplicationDbContext context) : IUserRepository
     public async Task<User?> GetByUsernameAsync(string username)
     {
         return await context.Users
-            .Include(u => u.UserProfile)
+            .Include(u => u.Profile)
             .Include(u => u.UserEmail)
-            .Include(u => u.UserPasswordReset)
+            .Include(u => u.PasswordReset)
             .Include(u => u.UserRoles)
             .ThenInclude(ur => ur.Role)
             .FirstOrDefaultAsync(u => EF.Functions.ILike(u.Username, username));
@@ -48,9 +49,9 @@ public class UserRepository(ApplicationDbContext context) : IUserRepository
     public async Task<User?> GetByEmailVerificationTokenAsync(string token)
     {
         return await context.Users
-            .Include(u => u.UserProfile)
+            .Include(u => u.Profile)
             .Include(u => u.UserEmail)
-            .Include(u => u.UserPasswordReset)
+            .Include(u => u.PasswordReset)
             .Include(u => u.UserRoles)
             .ThenInclude(ur => ur.Role)
             .FirstOrDefaultAsync(u => u.UserEmail != null &&
@@ -61,17 +62,17 @@ public class UserRepository(ApplicationDbContext context) : IUserRepository
     public async Task<User?> GetByPasswordResetTokenAsync(string token)
     {
         return await context.Users
-            .Include(u => u.UserProfile)
+            .Include(u => u.Profile)
             .Include(u => u.UserEmail)
-            .Include(u => u.UserPasswordReset)
+            .Include(u => u.PasswordReset)
             .Include(u => u.UserRoles)
             .ThenInclude(ur => ur.Role)
-            .FirstOrDefaultAsync(u => u.UserPasswordReset != null &&
-                                      u.UserPasswordReset.PasswordResetToken == token);
+            .FirstOrDefaultAsync(u => u.PasswordReset != null &&
+                                      u.PasswordReset.PasswordResetToken == token);
     }
  
     // 6. Crea un nuevo registro de usuario en la BD y lo retorna con sus relaciones
-    public async Task<User> CreateAsync(User user)
+    public async Task<User?> CreateAsync(User user)
     {
         context.Users.Add(user);
         await context.SaveChangesAsync();
@@ -80,17 +81,23 @@ public class UserRepository(ApplicationDbContext context) : IUserRepository
  
     // 7. Actualiza la información de un usuario existente
     public async Task<User> UpdateAsync(User user)
-    {
-        await context.SaveChangesAsync();
-        return await GetByIdAsync(user.Id);
-    }
+{
+    context.Users.Update(user);
+    await context.SaveChangesAsync();
+    var updatedUser = await GetByIdAsync(user.Id);
+    return updatedUser ?? user;
+}
  
     // 8. Elimina un usuario de la base de datos por su ID
     public async Task<bool> DeleteAsync(string id)
     {
         var user = await GetByIdAsync(id);
-        context.Users.Remove(user);
-        await context.SaveChangesAsync();
+        
+        if(user != null) 
+        {
+            context.Users.Remove(user);
+            await context.SaveChangesAsync();
+        }
         return true;
     }
  
@@ -122,11 +129,10 @@ public class UserRepository(ApplicationDbContext context) : IUserRepository
             Id = UuidGenerator.GenerateUserId(),
             UserId = userId,
             RoleId = roleId,
-            AssignedAt = DateTime.UtcNow
+            AssignedAt = DateTime.UtcNow 
         };
  
         context.UserRoles.Add(newUserRole);
         await context.SaveChangesAsync();
     }
- 
 }

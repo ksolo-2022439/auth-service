@@ -1,9 +1,10 @@
 using AuthService.Application.Interfaces;
 using AuthService.Application.Services;
-using AuthService.Domain.Entities;
-using AuthService.Domain.Constants;
+using AuthService.Domain.Interfaces;
 using AuthService.Persistence.Data;
-using Microsoft.EntityFrameworkCore;
+using AuthService.Persistence.Repositories;
+using Microsoft.EntityFrameworkCore; 
+
 
 namespace AuthService.Api.Extensions;
 
@@ -11,16 +12,26 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration configuration)
     {
-        // INICIALIZANDO LA CONEXIÓN A LA BASE DE DATOS
+        // INICIALIZANDO EL CONEXION A LA BASE DE DATOS
         services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"))
-                   .UseSnakeCaseNamingConvention());
+                options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"))
+                       .UseSnakeCaseNamingConvention());
 
-        // INICIALIZANDO EL SERVICIO DE EMAIL
+        // Configure application services <------ ACTUALIZACIÓN
+        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IRoleRepository, RoleRepository>();
+        services.AddScoped<IAuthService, Application.Services.AuthService>();
+        services.AddScoped<IUserManagementService, UserManagementService>();
+        services.AddScoped<IPasswordHashService, PasswordHashService>();
+        services.AddScoped<IJwtTokenService, JwtTokenService>();
+        services.AddScoped<ICloudinaryService, CloudinaryService>();
+        
+        // Servicio de correo
         services.AddScoped<IEmailService, EmailService>();
 
-        services.AddHealthChecks();
-        
+
+        services.AddHealthChecks(); 
+
         return services;
     }
 }

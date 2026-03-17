@@ -56,7 +56,8 @@ public class ApplicationDbContext : DbContext
             entity.HasIndex(e => e.Username).IsUnique();
 
             // Relación de 1:1 con UserProfile
-            entity.HasOne(e => e.UserProfile)
+            // CORRECCIÓN: Se cambió e.UserProfile por e.Profile
+            entity.HasOne(e => e.Profile)
                 .WithOne(p => p.User)
                 .HasForeignKey<UserProfile>(p => p.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
@@ -74,7 +75,8 @@ public class ApplicationDbContext : DbContext
                 .OnDelete(DeleteBehavior.Cascade);
 
              // Relación 1:1 con UserPasswordReset
-            entity.HasOne(e => e.UserPasswordReset)
+             // CORRECCIÓN: Se cambió e.UserPasswordReset por e.PasswordReset
+            entity.HasOne(e => e.PasswordReset)
                 .WithOne(up => up.User)
                 .HasForeignKey<UserPasswordReset>(up => up.UserId)
                 .OnDelete(DeleteBehavior.Cascade);

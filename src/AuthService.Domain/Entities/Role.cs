@@ -1,9 +1,8 @@
 using System.ComponentModel.DataAnnotations;
- 
-namespace AuthService.Domain.Entities;
- 
-public class Role
 
+namespace AuthService.Domain.Entities;
+
+public class Role
 {
     [Key]
     [MaxLength(16)]
@@ -14,9 +13,19 @@ public class Role
     public string Name { get; set; } = string.Empty;
 
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-    public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
-    
-    public ICollection<UserRole> UserRoles { get; set; } = [];
 
+    public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+
+    public ICollection<UserRole> UserRoles { get; set; } = [];
 }
- 
+
+/*
+Roles
++--------------+--------------+------------------+
+| Id           | Name         | Description      |
++--------------+--------------+------------------+
+| ADMIN        | Admin        | Administrador    |
+| USER         | User         | Usuario normal   |
+| GUEST        | Guest        | Invitado         |
++--------------+--------------+------------------+
+*/
