@@ -66,8 +66,7 @@ namespace AuthService.Persistence.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("character varying(150)")
+                        .HasColumnType("text")
                         .HasColumnName("email");
 
                     b.Property<string>("Name")
@@ -78,8 +77,7 @@ namespace AuthService.Persistence.Migrations
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("character varying(255)")
+                        .HasColumnType("text")
                         .HasColumnName("password");
 
                     b.Property<bool>("Status")
@@ -191,16 +189,18 @@ namespace AuthService.Persistence.Migrations
                         .HasColumnType("character varying(16)")
                         .HasColumnName("id");
 
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("date_of_birth");
+
                     b.Property<string>("Phone")
                         .IsRequired()
-                        .HasMaxLength(8)
-                        .HasColumnType("character varying(8)")
+                        .HasColumnType("text")
                         .HasColumnName("phone");
 
                     b.Property<string>("ProfilePicture")
                         .IsRequired()
-                        .HasMaxLength(512)
-                        .HasColumnType("character varying(512)")
+                        .HasColumnType("text")
                         .HasColumnName("profile_picture");
 
                     b.Property<string>("UserId")
@@ -226,19 +226,15 @@ namespace AuthService.Persistence.Migrations
                         .HasColumnType("character varying(16)")
                         .HasColumnName("id");
 
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<DateTime>("AssignedAt")
                         .HasColumnType("timestamp with time zone")
-                        .HasColumnName("created_at");
+                        .HasColumnName("assigned_at");
 
                     b.Property<string>("RoleId")
                         .IsRequired()
                         .HasMaxLength(16)
                         .HasColumnType("character varying(16)")
                         .HasColumnName("role_id");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("updated_at");
 
                     b.Property<string>("UserId")
                         .IsRequired()
@@ -285,20 +281,20 @@ namespace AuthService.Persistence.Migrations
 
             modelBuilder.Entity("AuthService.Domain.Entities.UserProfile", b =>
                 {
-                    b.HasOne("AuthService.Domain.Entities.User", "User")
+                    b.HasOne("AuthService.Domain.Entities.User", "Users")
                         .WithOne("UserProfile")
                         .HasForeignKey("AuthService.Domain.Entities.UserProfile", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_user_profile_user_user_id");
 
-                    b.Navigation("User");
+                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("AuthService.Domain.Entities.UserRole", b =>
                 {
                     b.HasOne("AuthService.Domain.Entities.Role", "Role")
-                        .WithMany("UserRoles")
+                        .WithMany("UserRole")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
@@ -318,7 +314,7 @@ namespace AuthService.Persistence.Migrations
 
             modelBuilder.Entity("AuthService.Domain.Entities.Role", b =>
                 {
-                    b.Navigation("UserRoles");
+                    b.Navigation("UserRole");
                 });
 
             modelBuilder.Entity("AuthService.Domain.Entities.User", b =>

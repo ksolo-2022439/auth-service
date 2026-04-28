@@ -10,15 +10,17 @@ public class RoleRepository(ApplicationDbContext context) : IRoleRepository
     public async Task<Role?> GetByNameAsync(string roleName)
     {
         return await context.Roles
-        .Include(r => r.UserRoles)
-        .FirstOrDefaultAsync(r => r.Name == roleName);
+        .Include(r => r.UserRole)
+            .FirstOrDefaultAsync(r => r.Name == roleName);
     }
-    public async Task<int> CountUsersInRoleAsync(string roleName)
+
+    public async Task<int> CountUsersInRoleAsync(string roleId)
     {
         return await context.UserRoles
-        .Where(ur => ur.Role.Name == roleName)
-        .CountAsync();
+        .Where(ur => ur.RoleId == roleId)
+            .CountAsync();
     }
+
     public async Task<IReadOnlyList<User>> GetUsersByRoleAsync(string roleName)
     {
         return await context.UserRoles
@@ -31,6 +33,7 @@ public class RoleRepository(ApplicationDbContext context) : IRoleRepository
         .ToListAsync()
         .ContinueWith(t => (IReadOnlyList<User>)t.Result);
     }
+
     public async Task<IReadOnlyList<string>> GetUserRoleNamesAsync(string userId)
     {
         return await context.UserRoles

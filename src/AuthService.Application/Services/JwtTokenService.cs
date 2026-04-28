@@ -6,11 +6,11 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-
 namespace AuthService.Application.Services;
 
 public class JwtTokenService(IConfiguration configuration) : IJwtTokenService
 {
+    // ...
     public string GenerateToken(User user)
     {
         var jwtSettings = configuration.GetSection("JwtSettings");

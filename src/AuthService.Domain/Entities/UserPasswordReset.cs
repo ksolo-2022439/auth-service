@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 namespace AuthService.Domain.Entities;
+
 public class UserPasswordReset
 {
     [Key]
@@ -9,12 +10,12 @@ public class UserPasswordReset
     [Required]
     [MaxLength(16)]
     public string UserId { get; set; } = string.Empty;
-    
+
     [MaxLength(256)]
     public string? PasswordResetToken { get; set; }
-    
+
     public DateTime? PasswordResetTokenExpiry { get; set; }
-    
+
     [Required]
     public User User { get; set; } = null!;
 }

@@ -1,3 +1,5 @@
+using System.Net;
+using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -5,8 +7,7 @@ namespace AuthService.Application.Services;
 
 public static class UuidGenerator
 {
-    private const string Alphabet = "123456789ABCDEFGHJKMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz";
-
+    private const string Alphabet = "1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     public static string GenerateShortUUID()
     {
         using var rng = RandomNumberGenerator.Create();
@@ -14,14 +15,13 @@ public static class UuidGenerator
         rng.GetBytes(bytes);
 
         var result = new StringBuilder(12);
-
+        
         for (int i = 0; i < 12; i++)
         {
             result.Append(Alphabet[bytes[i] % Alphabet.Length]);
         }
 
         return result.ToString();
-
     }
 
     public static string GenerateUserId()
@@ -40,7 +40,6 @@ public static class UuidGenerator
         {
             return false;
         }
-
         if (id.Length != 12 || !id.StartsWith("usr_"))
         {
             return false;
@@ -48,6 +47,5 @@ public static class UuidGenerator
 
         var idPart = id[4..];
         return idPart.All(c => Alphabet.Contains(c));
-
     }
 }

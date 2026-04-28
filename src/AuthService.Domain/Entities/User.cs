@@ -22,24 +22,22 @@ public class User
 
     [Required]
     [EmailAddress]
-    [MaxLength(150)]
     public string Email { get; set; } = string.Empty;
 
     [Required]
-    [MaxLength(255)]
+    [MinLength(255)]
     public string Password { get; set; } = string.Empty;
 
-    public bool Status { get; set; } = false;
-
     [Required]
+    public bool Status { get; set; } = true;
+
     public DateTime CreatedAt { get; set; }
-
-    [Required]
     public DateTime UpdatedAt { get; set; }
+    
+    public virtual UserProfile UserProfile { get; set; } = null!; 
 
-    // Relaciones de navegación
-    public UserProfile UserProfile { get; set; } = null!;
-    public ICollection<UserRole> UserRoles { get; set; } = [];
-    public UserEmail UserEmail { get; set; } = null!;
-    public UserPasswordReset UserPasswordReset { get; set; } = null!;
+    public virtual ICollection<UserRole> UserRoles { get; set; } = new List<UserRole>();
+
+    public virtual UserPasswordReset UserPasswordReset { get; set; } = null!;
+    public virtual UserEmail UserEmail { get; set; } = null!;
 }

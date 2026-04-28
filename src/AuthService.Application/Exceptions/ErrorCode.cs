@@ -10,3 +10,4 @@ public static class ErrorCodes
     public const string INVALID_FILE_FORMAT = "INVALID_FILE_FORMAT";
     public const string FILE_TOO_LARGE = "FILE_TOO_LARGE";
 }
+

@@ -7,13 +7,14 @@ namespace AuthService.Application.Services;
 
 public class PasswordHashService : IPasswordHashService
 {
-    // Configuración idéntica a Node.js para compatibilidad
+	 // Configuración idéntica a Node.js para compatibilidad
     private const int SaltSize = 16;
     private const int HashSize = 32;
     private const int Iterations = 2; // t=2 (igual que Node.js)
     private const int Memory = 102400; // m=102400 KB = 100 MB (igual que Node.js)
     private const int Parallelism = 8; // p=8 (igual que Node.js)
-
+    
+    // ...
 
     public string HashPassword(string password)
     {
@@ -40,7 +41,7 @@ public class PasswordHashService : IPasswordHashService
         return $"$argon2id$v=19$m={Memory},t={Iterations},p={Parallelism}${saltBase64}${hashBase64}";
     }
 
-    public bool VerifyPassword(string password, string hashedPassword)
+        public bool VerifyPassword(string password, string hashedPassword)
     {
         try
         {
@@ -134,7 +135,6 @@ public class PasswordHashService : IPasswordHashService
         var computedHash = argon2.GetBytes(HashSize);
         return hash.SequenceEqual(computedHash);
     }
-
 
     private static string FromBase64UrlSafe(string base64UrlSafe)
     {

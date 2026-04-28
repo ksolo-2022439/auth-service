@@ -28,7 +28,6 @@ public class EmailService(IConfiguration configuration, ILogger<EmailService> lo
 
         await SendEmailAsync(email, subject, body);
     }
-
     public async Task SendPasswordResetAsync(string email, string username, string token)
     {
         var subject = "Reset your password";
@@ -109,18 +108,6 @@ public class EmailService(IConfiguration configuration, ILogger<EmailService> lo
 
             try
             {
-                // Configurar validación de certificados SSL
-                var ignoreCertErrors = bool.Parse(smtpSettings["IgnoreCertificateErrors"] ?? "false");
-                if (ignoreCertErrors)
-                {
-                    logger.LogWarning("Validación de certificados SSL deshabilitada. Solo usar en desarrollo.");
-                    client.ServerCertificateValidationCallback = (s, c, h, e) => true;
-                }
-
-                // Configurar SSL
-                var enableSsl = bool.Parse(smtpSettings["EnableSsl"] ?? "false");
-                var ignoreCertificateErrors = bool.Parse(smtpSettings["IgnoreCertificateErrors"] ?? "false");
-
                 // Verificar configuración de SSL implícito
                 var useImplicitSsl = bool.Parse(smtpSettings["UseImplicitSsl"] ?? "false");
 
@@ -182,4 +169,5 @@ public class EmailService(IConfiguration configuration, ILogger<EmailService> lo
             throw new InvalidOperationException($"Failed to send email: {ex.Message}", ex);
         }
     }
+
 }
